@@ -41,8 +41,8 @@ namespace ros2_control_odri {
 
 /* Code issue from demo_odri_actuator_control.cpp (ODRI)*/
 
-Eigen::Vector6d desired_joint_position = Eigen::Vector6d::Zero();
-Eigen::Vector6d desired_torque = Eigen::Vector6d::Zero();
+Eigen::Vector12d desired_joint_position = Eigen::Vector12d::Zero();
+Eigen::Vector12d desired_torque = Eigen::Vector12d::Zero();
 
 hardware_interface::return_type
 SystemOdriHardware::read_default_cmd_state_value(
@@ -569,12 +569,12 @@ hardware_interface::return_type SystemOdriHardware::read(
 
 hardware_interface::return_type SystemOdriHardware::write(
     const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) {
-  Eigen::Vector6d positions;
-  Eigen::Vector6d velocities;
-  Eigen::Vector6d torques;
+  Eigen::Vector12d positions;
+  Eigen::Vector12d velocities;
+  Eigen::Vector12d torques;
 
-  Eigen::Vector6d gain_KP;
-  Eigen::Vector6d gain_KD;
+  Eigen::Vector12d gain_KP;
+  Eigen::Vector12d gain_KD;
 
   for (const hardware_interface::ComponentInfo &joint : info_.joints) {
     if ((control_mode_[joint.name] == control_mode_t::POS_VEL_EFF_GAINS) ||
@@ -595,6 +595,7 @@ hardware_interface::return_type SystemOdriHardware::write(
     }
   }
 
+#if 0
   static unsigned int my_perso_counter2 = 0;
   if (my_perso_counter2 % 1000 == 0) {
     std::cout << "positions:" << positions.transpose() << std::endl;
@@ -605,6 +606,7 @@ hardware_interface::return_type SystemOdriHardware::write(
     std::cout << " " << std::endl;
   }
   ++my_perso_counter2;
+#endif
 
   robot_->joints->SetDesiredPositions(positions);
   robot_->joints->SetDesiredVelocities(velocities);

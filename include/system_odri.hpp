@@ -58,10 +58,10 @@ void print_vector(std::string v_name,
 
 namespace Eigen {
 /** @brief Eigen shortcut for vector of size 6. */
-typedef Matrix<double, 6, 1> Vector6d;
-typedef Matrix<bool, 6, 1> Vector6b;
-typedef Matrix<long, 6, 1> Vector6l;
-typedef Matrix<int, 6, 1> Vector6i;
+typedef Matrix<double, 12, 1> Vector12d;
+typedef Matrix<bool, 12, 1> Vector12b;
+typedef Matrix<long, 12, 1> Vector12l;
+typedef Matrix<int, 12, 1> Vector12i;
 /** @brief Eigen shortcut for vector of size 3. */
 typedef Matrix<long, 3, 1> Vector3l;
 /** @brief Eigen shortcut for vector of size 4. */
@@ -148,11 +148,11 @@ class SystemOdriHardware : public hardware_interface::SystemInterface {
 
   // Definition of multiple variables about Odri
   //  Joint
-  Eigen::Vector6i motor_numbers_;
-  Eigen::Vector6b motor_reversed_polarities_;
-  Eigen::Vector6d joint_lower_limits_;
-  Eigen::Vector6d joint_upper_limits_;
-  Eigen::Vector6d position_offsets_;
+  Eigen::Vector12i motor_numbers_;
+  Eigen::Vector12b motor_reversed_polarities_;
+  Eigen::Vector12d joint_lower_limits_;
+  Eigen::Vector12d joint_upper_limits_;
+  Eigen::Vector12d position_offsets_;
 
   // IMU
   Eigen::Vector3l rotate_vector_;
