@@ -2,8 +2,8 @@
 
 /*Modifs :
 
-   Vector12d --> Vector6d
-   Boucles for pour les couples : i<12 --> i<6
+   Vector12d --> Vector12d
+   Boucles for pour les couples : i<12 --> i<12
    CONFIG_ROBOT_YAML
 
 */
@@ -17,7 +17,7 @@ using namespace odri_control_interface;
 #include <iostream>
 #include <stdexcept>
 
-typedef Eigen::Matrix<double, 6, 1> Vector6d;
+typedef Eigen::Matrix<double, 12, 1> Vector12d;
 
 int main() {
   nice(-20);  // Give the process a high priority.
@@ -31,10 +31,10 @@ int main() {
   // Define controller to calibrate the joints from yaml file.
   auto calib_ctrl =
       JointCalibratorFromYamlFile(CONFIG_ROBOT_YAML, robot->joints);
-  Eigen::Matrix<double, 6, 1> zero6 = Eigen::Matrix<double, 6, 1>::Zero();
+  Eigen::Matrix<double, 12, 1> zero12 = Eigen::Matrix<double, 12, 1>::Zero();
   calib_ctrl->UpdatePositionOffsets(zero6);
   // Initialize simple pd controller.
-  Vector6d torques;
+  Vector12d torques;
   int c = 0;
   std::chrono::time_point<std::chrono::system_clock> last =
       std::chrono::system_clock::now();
@@ -57,7 +57,7 @@ int main() {
           auto pos = robot->joints->GetPositions();
           auto vel = robot->joints->GetVelocities();
           // Reverse the positions;
-          for (int i = 0; i < 6; i++) {
+          for (int i = 0; i < 12; i++) {
             torques[i] = 0.0;  //-kp * pos[i] - kd * vel[i]
           }
           robot->joints->SetTorques(torques);

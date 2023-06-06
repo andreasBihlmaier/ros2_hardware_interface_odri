@@ -390,43 +390,43 @@ SystemOdriHardware::export_state_interfaces() {
 
   for (const hardware_interface::ComponentInfo &sensor : info_.sensors) {
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "gyroscope_x", &imu_states_[sensor.name].gyro_x));
+        sensor.name, "angular_velocity.x", &imu_states_[sensor.name].gyro_x));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "gyroscope_y", &imu_states_[sensor.name].gyro_y));
+        sensor.name, "angular_velocity.y", &imu_states_[sensor.name].gyro_y));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "gyroscope_z", &imu_states_[sensor.name].gyro_z));
+        sensor.name, "angular_velocity.z", &imu_states_[sensor.name].gyro_z));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "accelerometer_x", &imu_states_[sensor.name].accelero_x));
+        sensor.name, "accelerometer.x", &imu_states_[sensor.name].accelero_x));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "accelerometer_y", &imu_states_[sensor.name].accelero_y));
+        sensor.name, "accelerometer.y", &imu_states_[sensor.name].accelero_y));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "accelerometer_z", &imu_states_[sensor.name].accelero_z));
+        sensor.name, "accelerometer.z", &imu_states_[sensor.name].accelero_z));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "linear_acceleration_x",
+        sensor.name, "linear_acceleration.x",
         &imu_states_[sensor.name].line_acc_x));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "linear_acceleration_y",
+        sensor.name, "linear_acceleration.y",
         &imu_states_[sensor.name].line_acc_y));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "linear_acceleration_z",
+        sensor.name, "linear_acceleration.z",
         &imu_states_[sensor.name].line_acc_z));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "attitude_euler_x", &imu_states_[sensor.name].euler_x));
+        sensor.name, "euler.x", &imu_states_[sensor.name].euler_x));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "attitude_euler_y", &imu_states_[sensor.name].euler_y));
+        sensor.name, "euler.y", &imu_states_[sensor.name].euler_y));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-        sensor.name, "attitude_euler_z", &imu_states_[sensor.name].euler_z));
+        sensor.name, "euler.z", &imu_states_[sensor.name].euler_z));
     state_interfaces.emplace_back(
-        hardware_interface::StateInterface(sensor.name, "attitude_quaternion_x",
+        hardware_interface::StateInterface(sensor.name, "orientation.x",
                                            &imu_states_[sensor.name].quater_x));
     state_interfaces.emplace_back(
-        hardware_interface::StateInterface(sensor.name, "attitude_quaternion_y",
+        hardware_interface::StateInterface(sensor.name, "orientation.y",
                                            &imu_states_[sensor.name].quater_y));
     state_interfaces.emplace_back(
-        hardware_interface::StateInterface(sensor.name, "attitude_quaternion_z",
+        hardware_interface::StateInterface(sensor.name, "orientation.z",
                                            &imu_states_[sensor.name].quater_z));
     state_interfaces.emplace_back(
-        hardware_interface::StateInterface(sensor.name, "attitude_quaternion_w",
+        hardware_interface::StateInterface(sensor.name, "orientation.w",
                                            &imu_states_[sensor.name].quater_w));
   }
 
@@ -598,11 +598,11 @@ hardware_interface::return_type SystemOdriHardware::write(
 #if 0
   static unsigned int my_perso_counter2 = 0;
   if (my_perso_counter2 % 1000 == 0) {
-    std::cout << "positions:" << positions.transpose() << std::endl;
-    std::cout << "velocities:" << velocities.transpose() << std::endl;
-    std::cout << "torques: " << torques.transpose() << std::endl;
-    std::cout << "gain_KP: " << gain_KP.transpose() << std::endl;
-    std::cout << "gain_KD: " << gain_KD.transpose() << std::endl;
+    std::cout << "positions:" << positions.transpose() << "\n";
+    std::cout << "velocities:" << velocities.transpose() << "\n";
+    std::cout << "torques: " << torques.transpose() << "\n";
+    std::cout << "gain_KP: " << gain_KP.transpose() << "\n";
+    std::cout << "gain_KD: " << gain_KD.transpose() << "\n";
     std::cout << " " << std::endl;
   }
   ++my_perso_counter2;
